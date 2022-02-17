@@ -1,27 +1,34 @@
 <script type="text/ng-template" id="wgn-config">
-
+ 
 	<div>
 		<div class="section">
-			<button ng-click="onNewConfig()" type="button" class="btn btn-success create-config-button"
+			<div class="config-btn-container">	
+				<button ng-click="onNewConfig()" type="button" class="btn btn-success create-config-button"
 					ng-hide="!settings.multi || loading" ng-disabled="editing.config">
-				<i class="icon-plus"></i> Create Configuration
-			</button>
-
+					<i class="icon-plus"></i> Create Configuration
+				</button>
+				<button ng-click="copyConfiguration()" type="button" class="copy-config-btn  create-config-button btn btn-primary"
+						ng-hide="!settings.multi || loading" ng-disabled="editing.config">
+					<i class="icon-clone"></i> {{copyButtonText}}
+				</button>
+		</div>
+		<div ng-if="copyConfigOverlay" class = "config-overlay"></div>
+ 
 			<h2><i class="icon-{{ settings.icon }}"></i> {{ settings.title }}</h2>
-
+ 
 			<p class="config-intro">{{ settings.help }}</p>
 		</div>
-
+ 
 		<span ng-show="loading" class="throbber"></span>
-
+ 
 		<div class="config-container" ng-if="!loading">
 			<wgn-config-list ng-show="!editing.config && settings.multi"></wgn-config-list>
-
+ 
 			<form class="form" name="editing.form" ng-submit="onSaveConfig()" ng-show="editing.config" novalidate>
 				<a href="javascript:" ng-click="onDiscardChanges()" ng-show="settings.multi">
 					<i class="icon icon-left-circled"></i> Back
 				</a>
-
+ 
 				<div class="section">
 					<div class="form-actions">
 						<button type="button" class="btn btn-success pull-right" ng-click="onEnableConfig()"
@@ -29,44 +36,44 @@
 								ng-disabled="editing.form.$dirty || editing.form.$invalid || saving">
 							Enable
 						</button>
-
+ 
 						<button type="button" class="btn btn-warning pull-right" ng-click="onDisableConfig()"
 								ng-disabled="editing.form.$dirty || saving"
 								ng-show="settings.toggle && editing.config.$id && editing.config.enabled">
 							Disable
 						</button>
-
+ 
 						<button type="button" class="btn btn-danger pull-right" ng-click="onDeleteConfig()"
 								ng-disabled="editing.form.$dirty || saving"
 								ng-show="settings.multi && editing.config.$id">
 							Delete
 						</button>
 					</div>
-
+ 
 					<wgn-config-name></wgn-config-name>
-
+ 
 					<wgn-config-inputs></wgn-config-inputs>
 				</div>
-
+ 
 				<div class="form-actions bottom-actions">
 					<button type="submit" class="btn btn-primary pull-right"
 							ng-disabled="!editing.form.$dirty || editing.form.$invalid || saving">
 						Save configuration
 					</button>
-
+ 
 					<button type="button" class="btn pull-right" ng-click="onDiscardChanges()"
 							ng-show="settings.multi || editing.form.$dirty">
 						<span ng-show="settings.multi">Cancel</span>
 						<span ng-hide="settings.multi">Discard changes</span>
 					</button>
-
+ 
 					<div class="required-fields pull-right" ng-show="!editing.form.$pristine && editing.form.$error.required">
 						Please fill all required fields
 					</div>
 				</div>
 			</form>
-
+ 
 		</div>
-
+ 
 	</div>
 </script>

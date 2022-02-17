@@ -1,69 +1,90 @@
 $color-error: #a94442;
 $color-success: #3c763d;
-
+$toggle-green: rgba(19,191,17,1);
+ 
+ 
 @mixin field-state($color) {
 	.form-label {
 		color: $color;
 	}
-
+ 
 	.form-control {
 		border-color: $color;
 		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 	}
-
+ 
 }
-
+.config-btn-container{
+	display:flex;
+	flex-direction:column;
+	align-items:flex-end;
+	.copy-config-btn{
+		margin-top:10px;
+		z-index:2;
+	}
+	i{
+		margin-right:5px;
+	}
+}
+.config-overlay{
+	height:100vh;
+	width:100vw;
+	background:rgba(0, 0, 0, 0.05);
+	position:absolute;
+	top:0;
+	right:0;
+}
 .config-container {
 	margin-top: 2em;
-
+ 
 	.btn {
 		transition: .25s ease-in-out;
 	}
-
+ 
 	.btn.btn-warning {
 		background-color: #ec971f;
 		border-color: #d58512;
 		color: white;
-
+ 
 		&:hover {
 			background-color: lighten(#ec971f, 10%);
 		}
 	}
-
+ 
 	.danger {
 		font-size: 10px;
 		margin-left: 12px;
-
+ 
 		&.help-block {
 			font-size: .85em;
 			font-weight: 500;
 			margin-left: .3em;
 		}
 	}
-
+ 
 	.form-actions {
 		float: right;
 		position: relative;
 		z-index: 99;
 	}
-
+ 
 	.form-control {
 		width: 300px;
 	}
-
+ 
 	.bottom-actions {
 		float: none;
 	}
-
+ 
 	.help-block {
 		margin-top: .5em;
 	}
-
+ 
 	.nav-pills > li > a {
 		height: auto;
 		padding: 10px;
 	}
-
+ 
 	.section {
 		background: #fff;
 		border: 1px solid #dedede;
@@ -71,7 +92,7 @@ $color-success: #3c763d;
 		border-radius: 3px;
 		margin: 18px 0;
 	}
-
+ 
 	.required-fields {
 		color: $color-error;
 		font-size: 1.2em;
@@ -79,26 +100,26 @@ $color-success: #3c763d;
 		padding: 8px 12px;
 		line-height: normal;
 	}
-
+ 
 	ng-form.ng-dirty {
 		&.ng-invalid {
 			@include field-state($color-error);
 		}
-
+ 
 		&.ng-valid {
 			@include field-state($color-success);
 		}
 	}
-
+ 
 	.view-switcher {
 		float: right;
-
+ 
 		.switcher-link {
 			color: #3a7297;
 			display: inline-block;
 			margin-left: .5em;
 			transition: .25s ease-in-out;
-
+ 
 			&.selected {
 				color: #000;
 				pointer-events: none;
@@ -106,21 +127,21 @@ $color-success: #3c763d;
 			}
 		}
 	}
-
+ 
 	.form-group.group-choice {
 		border: 1px solid #dedede;
 		padding: 1em;
-
+ 
 		.controls {
 			position: relative;
-
+ 
 			span.danger {
 				position: absolute;
 				right: 0;
 				top: 10px;
 			}
 		}
-
+ 
 		.score-input {
 			.controls {
 				display: inline-block;
@@ -128,7 +149,7 @@ $color-success: #3c763d;
 			}
 		}
 	}
-
+ 
 	.form-group {
 		max-width: 400px;
 		.radio {
@@ -137,11 +158,11 @@ $color-success: #3c763d;
 				width: auto;
 				height: auto;
 			}
-
+ 
 			line-height: initial;
 			font-size: .9em;
 			font-weight: 100;
-
+ 
 			label {
 				padding-left:0;
 			}
@@ -151,37 +172,37 @@ $color-success: #3c763d;
 			font-size: .9em;
 			font-weight: 100;
 		}
-
+ 
 		.form-check-label {
 			line-height: initial;
 			font-size: .9em;
 			font-weight: 100;
 		}
 	}
-
+ 
 	.single-page {
 		margin-top: 2em;
 	}
-
+ 
 	.config-highlight {
 		color: #888;
 		cursor: pointer;
 		font-weight: 200;
-
+ 
 		.mch-name {
 			color: #666;
 			font-weight: 300;
 		}
 	}
 }
-
+ 
 .config-label {
 	font-size: 1.1em;
 	font-weight: 600;
 	margin-bottom: .8em;
 	text-transform: uppercase;
 }
-
+ 
 .config-intro {
 	font-size: 1em;
 	font-weight: 200;
@@ -189,53 +210,80 @@ $color-success: #3c763d;
 	padding-left: .35em;
 	width: 70%;
 }
-
+ 
 .config-list {
 	margin: 2em 0 0 0;
-
+ 
 	li {
 		border: 1px solid #dedede;
 		overflow: hidden;
+		display:flex;
+		align-items:center;
+ 
 	}
-
+ 
 	.config-name {
 		color: #666;
 		cursor: pointer;
 		font-size: 1.5em;
 		font-weight: 300;
 	}
-
+.icon-container{
+			display:flex;
+			position:absolute;
+			height:100%;
+			width:100%;
+			right:0;top:0;
+			align-items:center;
+			justify-content:flex-end;
+			padding:10px;
+			i{font-size:25px;
+				position:relative;
+				justify-self: center;
+			}
+			.green-check-icon{
+				color: $toggle-green;
+			}
+		}
 	&.list {
 		li {
 			margin-bottom: 2em;
 			position: relative;
 			padding: 1em;
+			.icon-container{
+			left: 60px;
+			top:0;
+ 
 		}
-
+		}
+ 
 		.config-name {
 			display: inline-block;
 			width: 30em;
 		}
-
+ 
 		.config-status {
-			display: inline-block;
+			display: flex;
 			position: absolute;
 			right: 5em;
 			top: 3px;
+			i{
+				align-self:center;
+			}
 		}
-
+ 
 		.config-highlights {
 			display: inline-block;
 			margin-left: 7em;
 		}
-
+ 
 		.config-highlight {
 			display: inline-block;
 			margin-left: 1em;
 			width: 11em;
 		}
 	}
-
+ 
 	&.grid {
 		li {
 			display: inline-block;
@@ -245,72 +293,71 @@ $color-success: #3c763d;
 			position: relative;
 			text-align: center;
 			width: 15em;
-
+ 
 			&:hover {
 				box-shadow: 0 0 3px -1px #000;
 			}
 		}
-
+ 
 		.config-name {
 			line-height: 1.5;
 			padding: 12px 0 0 0;
 			height: 145px;
-
+ 
 			&.with-highlight {
 				height: 90px;
 			}
 		}
-
+ 
 		.config-status {
 			border-top: 1px solid #dedede;
 			position: absolute;
 			bottom: 0;
 			width: 100%;
 		}
-
+ 
 		.config-highlight {
 			margin-bottom: 10px;
 		}
 	}
 }
-
+ 
 .config-name {
-
+ 
 	label {
 		font-weight: 300;
 		margin-bottom: 1em;
 	}
 }
-
+ 
 .config-empty {
 	font-size: 1.3em;
 	font-weight: 400;
 	padding: 5em 2em;
 	text-align: center;
 }
-
+ 
 .create-config-button {
 	color: #eee;
 	float: right;
 	font-size: 1.3em;
 	padding: .4em .6em;
 }
-
+ 
 .config-enable-message {
 	p {
 		font-size: 1.2em;
 		text-align: center;
 	}
 }
-
+ 
 $toggle-height: 15px;
-$toggle-green: rgba(19,191,17,1);
 $toggle-orange: #ff9900;
-
+ 
 .config-input {
 	display: inline-block;
 }
-
+ 
 .toggle-label {
 	display: block;
 	cursor: pointer;
@@ -323,7 +370,7 @@ $toggle-orange: #ff9900;
 	box-shadow: 0 0 0 2px #dddddd;
 	font-weight: 300;
 	transition: .25s ease-in-out;
-
+ 
 	.on {
 		display: block;
 		position: absolute;
@@ -345,7 +392,7 @@ $toggle-orange: #ff9900;
 		color: $toggle-orange;
 		transition: .25s ease-in-out;
 	}
-
+ 
 	&:before {
 		content: '';
 		display: block;
@@ -361,36 +408,36 @@ $toggle-orange: #ff9900;
 		transition: .25s ease-in-out;
 	}
 }
-
+ 
 .toggle {
 	position: absolute;
 	left: -5000px;
-
+ 
 	+ .toggle-label {
 		background: $toggle-orange;
 		box-shadow: 0 0 0 2px $toggle-orange;
-
+ 
 		&:before {
 			box-shadow: 0 3px 3px rgba(0, 0, 0, .2), 0 0 0 2px $toggle-orange;
 			transition: .25s ease-in-out;
 		}
 	}
-
+ 
 	&:checked {
 		+ .toggle-label {
 			background: $toggle-green;
 			box-shadow: 0 0 0 2px $toggle-green;
-
+ 
 			.on {
 				left: 45px;
 				opacity: 1;
 			}
-
+ 
 			.off {
 				right: 0;
 				opacity: 0;
 			}
-
+ 
 			&:before {
 				left: 19px;
 				box-shadow: 0 3px 3px rgba(0, 0, 0, .2), 0 0 0 2px $toggle-green;
@@ -399,7 +446,8 @@ $toggle-orange: #ff9900;
 		}
 	}
 }
-
+ 
 .inputs-nav {
 	max-width: 90%;
 }
+ 

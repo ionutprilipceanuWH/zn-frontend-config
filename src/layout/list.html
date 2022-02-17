@@ -2,47 +2,49 @@
 	<div class="section">
 		<div class="view-switcher" ng-show="configs.length">
 			View:
-
+ 
 			<a href="javascript:;" ng-click="display = 'grid'" class="switcher-link"
 				ng-class="{selected: display === 'grid'}">
 				<i class="icon-th-large"></i>
 				Grid
 			</a>
-
+ 
 			<a href="javascript:;" ng-click="display = 'list'" class="switcher-link"
 			   ng-class="{selected: display === 'list'}">
 				<i class="icon-list"></i>
 				List
 			</a>
 		</div>
-
+ 
 		<div class="config-label">Configurations</div>
-
+ 
 		<p ng-show="!configs.length" class="config-empty">
 			You don't have any configurations yet.
 			<a href="javascript:" ng-click="onNewConfig()">Let's create one!</a>
 		</p>
-
+ 
 		<ul class="config-list" ng-class="{grid: display === 'grid', list: display === 'list'}"
 			ng-show="configs.length">
-
-			<li ng-repeat="config in configs">
+ 
+			<li  ng-repeat="config in configs">
+ 
+ 
 				<div class="config-name" ng-click="onEditConfig(config.$id)" ng-class="{'with-highlight': config.mch1}">
 					{{ config.name }}
 				</div>
-
+ 
 				<div class="config-highlights" ng-if="config.mch1" ng-click="onEditConfig(config.$id)">
 					<div class="config-highlight">
 						<span class="mch-name">{{ config.mch1.type }}:</span>
 						<span class="mch-value">{{ config.mch1.value }}</span>
 					</div>
-
+ 
 					<div class="config-highlight" ng-if="config.mch2">
 						<span class="mch-name">{{ config.mch2.type }}:</span>
 						<span class="mch-value">{{ config.mch2.value }}</span>
 					</div>
 				</div>
-
+ 
 				<div class="config-status" ng-if="settings.toggle">
 					<input class="toggle" id="{{ 'configToggle' + config.$id }}" type="checkbox"
 						   ng-model="config.enabled"
@@ -51,6 +53,13 @@
 						<span class="on">Enabled</span>
 						<span class="off">Disabled</span>
 					</label>
+						<div ng-click="processSelectedConfig(config, $event)"  ng-if = "copyConfigOverlay"class="icon-container">
+ 
+					<i ng-if ="!config.selected" class=" icon-check-empty" ></i>
+					<i ng-if ="config.selected"class="icon-check green-check-icon"></i>
+ 
+				</div>
+ 
 				</div>
 			</li>
 		</ul>
